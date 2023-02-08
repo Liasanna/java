@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class 01_HashMap.java {
+public class 01_HashMap {
     private static HashMap<String, String> pb = new HashMap<String, String>();
 
     //addPB - добавляет запись по заданным номеру телефона и фамилии
