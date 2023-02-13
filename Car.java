@@ -1,34 +1,29 @@
-package com.Module2.Lesson1.task3;
+package ioc;
 
-/*Написать класс «автомобиль», который должен уметь заводится,
- глушить мотор, ехать и держать необходимую скорость.
- */
 public class Car {
-    private String name;
-    private int speed;
-
-    public void setName(String s) {
-        name = s;
+    private final Engine engine;
+    private int fuel;
+    public Car(Engine engine) {
+        this.engine = engine;
     }
 
-    public String getName() {
-        return name;
+    public void addFuel(int fuel) {
+        if(fuel < 0) {
+            throw new IllegalArgumentException("Can't add negative fuel");
+        }
+        this.fuel += fuel;
     }
 
-    public void switchOn() {
-        System.out.println(name + " завелся.");
+    public void start() {
+        if(fuel <= 0) {
+            throw new RuntimeException("Empty tank!");
+        }
+        engine.start();
     }
 
-    public void switchOff() {
-        System.out.println(name + " заглушил мотор.");
-    }
-
-    public void go() {
-        System.out.println(name + " поехал.");
-    }
-
-    public void keepSpeed(int x) {
-        speed += x;
-        System.out.println(name + " едет со скоростью " + speed + " км в час.");
+    public static class Engine {
+        public void start() {
+            System.out.println("Engine start");
+        }
     }
 }
