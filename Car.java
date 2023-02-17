@@ -1,29 +1,38 @@
-package ioc;
+public class Car extends Vehicle {
 
-public class Car {
-    private final Engine engine;
-    private int fuel;
-    public Car(Engine engine) {
-        this.engine = engine;
+    private int wheels;
+
+    public Car(int productionYear, String model, String color, int doors, int gear, int wheels) {
+        super(productionYear, model, color, doors, gear);
+        this.wheels = wheels;
     }
 
-    public void addFuel(int fuel) {
-        if(fuel < 0) {
-            throw new IllegalArgumentException("Can't add negative fuel");
+    @Override
+    public int moving(int speed) {
+        if(speed > 150) {
+            System.out.println("Driving at " + speed + " is very dangerous and prohibited in Poland. Please, decelerate your car!");
+        } else if(speed > 90){
+            System.out.println("At your current speed of " + speed + " you can drive only at highways.");
+        } else if(speed > 50) {
+            System.out.println("You are driving at speed of " + speed + ". You should decelerate if you are at build-up area.");
+        } else {
+            System.out.println("You are driving like a newbie. ");
         }
-        this.fuel += fuel;
+        return speed;
     }
 
-    public void start() {
-        if(fuel <= 0) {
-            throw new RuntimeException("Empty tank!");
+    @Override
+    public int changingGears(int gear) {
+        if(gear > getGear()) {
+            System.out.println("Gear changed to higher: " + gear);
+            return gear;
+        } else if(gear < getGear()) {
+            System.out.println("Gear changed to lower: " + gear);
+            return gear;
+        } else {
+            System.out.println("Gear remains at " + gear);
         }
-        engine.start();
-    }
-
-    public static class Engine {
-        public void start() {
-            System.out.println("Engine start");
-        }
+        return gear;
     }
 }
+
